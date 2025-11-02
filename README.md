@@ -1,6 +1,14 @@
 # recyclebin integration for Visual Studio Code
 
-# Features
+## Quick Start
+Get started veiw recyclebin item VS Code
+
+- Step 1: Allow execution poershell script. Open PowerShell execute this cmd.
+    `C:\Users\user> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+- step 2: Install the VSCode Extention.
+- step 3: Open Explore Sidebar. Open GOMI TREE. 
+
+## Features
 
 - list recyclebin items
 
