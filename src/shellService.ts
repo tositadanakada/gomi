@@ -58,8 +58,8 @@ export class ShellService {
     this.files = [];
     Tracer.verbose("getFileInfo");
     const stdoutbuffer = execFileSync(
-      this.context.extensionPath + "\\ps1\\recyclebinItemList.ps1",
-      { shell: "powershell.exe", maxBuffer: 1024 * 1024 * 50 }
+      this.context.extensionPath + "\\script\\cmd\\ps1\\recyclebinItemList.ps1",
+      { shell: "powershell.exe",}
     );
     const stdout = iconv.decode(stdoutbuffer, "shift_JIS");
     Tracer.verbose(`stdout:${stdout}`);
@@ -67,7 +67,7 @@ export class ShellService {
       Tracer.verbose(`${value}`);
       if (value !== "") {
         const json = JSON.parse(value);
-        this.files.push(this.parse_json(json));
+          this.files.push(this.parse_json(json));
       }
       return;
     });
