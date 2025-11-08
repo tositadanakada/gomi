@@ -8,7 +8,7 @@ if ($recycleBinItems.Count -eq 0){
   $noneobj=@{
     type = "notfound"
   }
-  convertTo-Json $noneobj # return $Recycle.Bin none
+  convertTo-Json $noneobj -Compress # return $Recycle.Bin none
 }else{
 
   foreach ($recycleBinItem in $recycleBinItems)

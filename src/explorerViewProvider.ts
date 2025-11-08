@@ -66,6 +66,5 @@ export class ExplorerViewProvider implements vscode.TreeDataProvider<InfoItem> {
         new InfoItem(value.abstPath, JSON.stringify(description), value)
       );
     });
-    Tracer.verbose(`this.folderList:${this.folderList[0].id}` );
   }
 }

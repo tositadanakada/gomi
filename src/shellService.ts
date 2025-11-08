@@ -7,6 +7,7 @@ import * as fs from "fs";
 import * as iconv from "iconv-lite";
 
 export interface FileInfo {
+  type: string;
   abstPath: string;
   relativePath: string;
   virtualPath: string;
@@ -46,6 +47,7 @@ export class ShellService {
 
   parse_json(info: any): FileInfo {
     return {
+      type: info.type,
       abstPath: info.abstPath,
       filename: info.filename,
       relativePath: info.relativePath,
@@ -67,7 +69,10 @@ export class ShellService {
       Tracer.verbose(`${value}`);
       if (value !== "") {
         const json = JSON.parse(value);
-          this.files.push(this.parse_json(json));
+        if (json.type==="notfound"){
+          return;
+        }
+        this.files.push(this.parse_json(json));
       }
       return;
     });
