@@ -29,6 +29,22 @@ export function getsid(): string {
   return sid;
 }
 
+export function getExecutionPolicy(): Boolean {
+  const getExecutionPolicyCommand = "Get-ExecutionPolicy";
+  let is_execution = false;
+  if (process.platform === "win32") {
+    const stdout = execSync(getExecutionPolicyCommand, {
+      shell: "powershell.exe",
+    });
+    const executionPolicy = stdout.toString().trim();
+    Tracer.verbose("ExecutionPolicy: " + executionPolicy);
+    const regex =/Restricted|Undefined/;
+    is_execution = regex.test(executionPolicy);
+    return !is_execution;
+  }
+  return is_execution;
+}
+
 export function createUri(): string {
   const sid = getsid();
   const recycleBinPath = "C:\\\\$Recycle.Bin\\\\" + sid; // escape string \\→\ \$→$
@@ -39,8 +55,15 @@ export class ShellService {
   public gomiUri: string;
   public files: FileInfo[] = [];
   private context: vscode.ExtensionContext;
+  private is_execution: Boolean;
 
   constructor(context: vscode.ExtensionContext) {
+    this.is_execution = getExecutionPolicy();
+    if (!this.is_execution){           
+      vscode.window.showErrorMessage(
+        '[GOMI] PSSecurityException. Allow execution powershell script.',
+      );
+    }
     this.gomiUri = createUri();
     this.context = context;
   }
@@ -57,13 +80,27 @@ export class ShellService {
   }
 
   public getFileInfo() {
-    this.files = [];
     Tracer.verbose("getFileInfo");
-    const stdoutbuffer = execFileSync(
-      this.context.extensionPath + "\\script\\cmd\\ps1\\recyclebinItemList.ps1",
-      { shell: "powershell.exe",}
-    );
-    const stdout = iconv.decode(stdoutbuffer, "shift_JIS");
+
+    if(!this.is_execution) {
+      Tracer.verbose("Allow execution powershell script");
+      return;
+    }
+    
+    this.files = [];
+
+    let stdout: string="";
+    try {
+      let stdoutbuffer = execFileSync(
+        this.context.extensionPath + "\\script\\cmd\\ps1\\recyclebinItemList.ps1",
+        { shell: "powershell.exe",}
+      );
+      stdout = iconv.decode(stdoutbuffer, "shift_JIS");
+    } catch(error){
+      if(error instanceof Error){
+        Tracer.error(error.message);
+      }
+    }
     Tracer.verbose(`stdout:${stdout}`);
     const splitstdout = stdout.split(/\r\n/g).forEach((value, index) => {
       Tracer.verbose(`${value}`);
