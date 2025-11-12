@@ -89,11 +89,15 @@ export class ShellService {
     
     this.files = [];
 
-    let stdout: string="";
+    let stdout="";
+    let commandpath= "";
     try {
+      commandpath = this.context.extensionPath + "\\script\\cmd\\ps1\\recyclebinItemList.ps1";
       let stdoutbuffer = execFileSync(
-        this.context.extensionPath + "\\script\\cmd\\ps1\\recyclebinItemList.ps1",
-        { shell: "powershell.exe",}
+        'powershell.exe',[
+          '-File',
+          `${commandpath}`
+        ],
       );
       stdout = iconv.decode(stdoutbuffer, "shift_JIS");
     } catch(error){
