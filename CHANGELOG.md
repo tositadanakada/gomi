@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.0.4]
+
+- Bugfix: Powershell error Command not found when username in space.
+
 ## [0.0.3]
 
 - Bugfix: Powershell breaks when manyfile opend
