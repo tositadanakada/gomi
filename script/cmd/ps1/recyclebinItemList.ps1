@@ -29,10 +29,16 @@ if ($recycleBinItems.Count -eq 0){
         roothash = $relativePath
       }
       convertTo-Json $rootobj -Compress
-      #echo $recycleBinItem | Get-Member
+      # echo $recycleBinItem | Get-Member
     }
-  
-    if ($recycleBinItem.IsFolder){
+    if ($maxfileCount -le 0){
+      return
+    }
+  }
+
+  foreach ($recycleBinItem in $recycleBinItems)
+  {
+      if ($recycleBinItem.IsFolder){
       $filepath = $recycleBinItem.Path
       $rootfolderName = $recycleBinItem.Name
       $rootfolderrestorepath = $recycleBinItem.ExtendedProperty("System.Recycle.DeletedFrom")
