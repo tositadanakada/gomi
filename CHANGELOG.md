@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.0.5]
+
+- Sort Show Item: Show  recyclebin root object first, then subdirectory object
+
 ## [0.0.4]
 
 - Bugfix: Powershell error Command not found when username in space.
