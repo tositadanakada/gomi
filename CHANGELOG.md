@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.0.6]
+
+- Remove file
+
+
 ## [0.0.5]
 
 - Sort Show Item: Show  recyclebin root object first, then subdirectory object

@@ -3,6 +3,8 @@
 ## Quick Start
 Get started veiw recyclebin item VS Code
 
+### Windows
+
 - Step 1: Allow execution poershell script. Open PowerShell execute this cmd.
     `C:\Users\user> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 - step 2: Install the VSCode Extention.
