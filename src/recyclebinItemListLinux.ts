@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import { Tracer} from "./tracer"
 import * as fs from 'fs';
 import * as os from "os" ;
-import * as path from "path"
+import * as path from "path";
 import * as ini from "ini";
 import {FileInfo} from "./interface";
 
@@ -28,8 +28,6 @@ export class RecyclebinItemListLinux{
     public files:FileInfo[] = []
     
     constructor(context: vscode.ExtensionContext){
-        console.log(this.gomiUri);
-        this.getFileInfo()
     }
 
     public getFileInfo(){

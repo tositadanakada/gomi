@@ -101,7 +101,6 @@ export class ShellService {
     }
     Tracer.verbose(`stdout:${stdout}`);
     const splitstdout = stdout.split(/\r\n/g).forEach((value, index) => {
-      Tracer.verbose(`${value}`);
       if (value !== "") {
         const json = JSON.parse(value);
         if (json.type==="notfound"){
@@ -111,6 +110,5 @@ export class ShellService {
       }
       return;
     });
-    Tracer.verbose(`${this.files}`);
   }
 }
