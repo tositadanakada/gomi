@@ -5,15 +5,7 @@ import { execSync, execFileSync } from "child_process";
 import path from "path";
 import * as fs from "fs";
 import * as iconv from "iconv-lite";
-
-export interface FileInfo {
-  type: string;
-  abstPath: string;
-  relativePath: string;
-  virtualPath: string;
-  filename: string;
-  restorePath: string;
-}
+import {FileInfo} from "./interface";
 
 export function getsid(): string {
   const getSidCommand = "(GET-LocalUser -Name $env:USERNAME).SID.Value";
@@ -52,20 +44,22 @@ export function createUri(): string {
 }
 
 export class ShellService {
-  public gomiUri: string;
+  public gomiUri: string| undefined;
   public files: FileInfo[] = [];
   private context: vscode.ExtensionContext;
-  private is_execution: Boolean;
+  private is_execution: Boolean|null| undefined;
 
   constructor(context: vscode.ExtensionContext) {
-    this.is_execution = getExecutionPolicy();
-    if (!this.is_execution){           
-      vscode.window.showErrorMessage(
-        '[GOMI] PSSecurityException. Allow execution powershell script.',
-      );
-    }
-    this.gomiUri = createUri();
     this.context = context;
+    if (process.platform === "win32"){
+      this.gomiUri = createUri();
+      this.is_execution = getExecutionPolicy();
+      if (!this.is_execution){           
+        vscode.window.showErrorMessage(
+          '[GOMI] PSSecurityException. Allow execution powershell script.',
+        );
+      }
+    }
   }
 
   parse_json(info: any): FileInfo {

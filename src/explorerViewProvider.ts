@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { createUri, ShellService } from "./shellService";
 import { FileInfo, Model } from "./model";
 import { Tracer } from "./tracer";
+import { RecyclebinItemListLinux } from "./recyclebinItemListLinux";
 
 class InfoItem extends vscode.TreeItem {
   constructor(
@@ -32,7 +33,7 @@ export class ExplorerViewProvider implements vscode.TreeDataProvider<InfoItem> {
 
   folderList: InfoItem[] = [];
 
-  constructor(private _model: Model, private _shellService: ShellService) {
+  constructor(private _model: Model, private _shellService: ShellService, private _recyclebinItemListLinux: RecyclebinItemListLinux) {
     Tracer.verbose("explorerViewProvider");
   }
 
@@ -53,8 +54,14 @@ export class ExplorerViewProvider implements vscode.TreeDataProvider<InfoItem> {
   }
 
   private getInfoItem() {
-    this._shellService.getFileInfo();
-    const files = this._shellService.files;
+    let files: FileInfo[]= [];
+    if (process.platform === "win32"){
+      this._shellService.getFileInfo();
+      files = this._shellService.files;
+    } else if(process.platform ==="linux"){
+      this._recyclebinItemListLinux.getFileInfo();
+      files = this._recyclebinItemListLinux.files;
+    }
     files.forEach((value, index) => {
       let restorePath = value.restorePath + value.virtualPath;
       let description = {
