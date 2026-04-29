@@ -5,7 +5,7 @@
   "version": "0.0.7",
   "publisher": "tositadanakada",
   "author": {
-  "email": "tositadanakada@gmail.com",
+    "email": "tositadanakada@gmail.com",
     "name": "tositadanakada"
   },
   "engines": {
@@ -103,6 +103,7 @@
   },
   "dependencies": {
     "@vscode/vsce": "^3.2.2",
+    "ci": "^2.3.0",
     "generator-code": "^1.11.10",
     "iconv-lite": "^0.6.3",
     "ini": "^6.0.0",

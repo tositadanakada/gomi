@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.0.8]
+
+- Bugfix Windows: The progeam not terminate even if there are more than 30 in the trash directory.
+
 ## [0.0.7]
 
 - support Linux

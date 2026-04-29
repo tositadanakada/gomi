@@ -31,9 +31,10 @@ if ($recycleBinItems.Count -eq 0){
       convertTo-Json $rootobj -Compress
       # echo $recycleBinItem | Get-Member
     }
-    if ($maxfileCount -le 0){
-      return
-    }
+  }
+  
+  if ($maxfileCount -le 0){
+    return
   }
 
   foreach ($recycleBinItem in $recycleBinItems)
@@ -68,8 +69,8 @@ if ($recycleBinItems.Count -eq 0){
       }
       #echo $chiledlen | Get-Member
     }
-    if ($maxfileCount -le 0){
-      return
-    }
+  }
+  if ($maxfileCount -le 0){
+    return
   }
 }
