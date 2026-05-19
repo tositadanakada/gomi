@@ -2,7 +2,7 @@
   "name": "gomi",
   "displayName": "gomi",
   "description": "list recyclebin item .view recyclebin item. copy recyclebin item. ",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "publisher": "tositadanakada",
   "author": {
     "email": "tositadanakada@gmail.com",
@@ -98,16 +98,17 @@
     "@typescript-eslint/parser": "^8.22.0",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.9.1",
+    "ci": "^2.3.0",
     "eslint": "^9.32.0",
-    "typescript": "^5.7.3"
+    "generator-code": "^1.11.18",
+    "mocha": "^11.7.5",
+    "ovsx": "^0.10.12",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.59.4"
   },
   "dependencies": {
-    "@vscode/vsce": "^3.2.2",
-    "ci": "^2.3.0",
-    "generator-code": "^1.11.10",
     "iconv-lite": "^0.6.3",
-    "ini": "^6.0.0",
-    "mocha": "^11.7.1",
-    "typescript-eslint": "^8.38.0"
+    "ini": "^6.0.0"
   }
 }
